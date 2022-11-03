@@ -24,21 +24,21 @@ CREATE TABLE przetwory(id_przetworu INT PRIMARY KEY, rok_produkcji YEAR DEFAULT 
 INSERT INTO przetwory VALUES(1,2022,1,'bigos','papryczka_chili',3);
 
 Zadanie 5
-insert into postac VALUES(NULL, 'Alrik', 'wiking', '2000-01-01',20);
-insert into postac VALUES(NULL, 'Arni', 'wiking', '1999-01-01',23);
-insert into postac VALUES(NULL, 'Berg', 'wiking', '1998-01-01',24);
-insert into postac VALUES(NULL, 'Edgar', 'wiking', '1997-01-01',25);
-insert into postac VALUES(NULL, 'Gaut', 'wiking', '1996-01-01',26);
+INSERT INTO postac VALUES(NULL, 'Alrik', 'wiking', '2000-01-01',20);
+INSERT INTO postac VALUES(NULL, 'Arni', 'wiking', '1999-01-01',23);
+INSERT INTO postac VALUES(NULL, 'Berg', 'wiking', '1998-01-01',24);
+INSERT INTO postac VALUES(NULL, 'Edgar', 'wiking', '1997-01-01',25);
+INSERT INTO postac VALUES(NULL, 'Gaut', 'wiking', '1996-01-01',26);
 CREATE TABLE statek(nazwa_statku VARCHAR(60) PRIMARY KEY, rodzaj_statku ENUM('handlowy','zaopatrzeniowy','wojenny','pasazerski'), data_wodowania DATE, max_ladownosc INT UNSIGNED);
-insert into statek VALUES('dlugi_waz', 'wojenny', '2020-10-10', 2000);
-insert into statek VALUES('prince_royal', 'wojenny', '2020-10-10', 5000);
-ALTER TABLE postac add column funkcja VARCHAR(60);
+INSERT INTO statek VALUES('dlugi_waz', 'wojenny', '2020-10-10', 2000);
+INSERT INTO statek VALUES('prince_royal', 'wojenny', '2020-10-10', 5000);
+ALTER TABLE postac ADD COLUMN funkcja VARCHAR(60);
 UPDATE postac SET funkcja='kapitan' WHERE nazwa='Bjorn';
 ALTER TABLE postac ADD column statek VARCHAR(60);
 ALTER TABLE postac ADD CONSTRAINT statek FOREIGN KEY (statek) REFERENCES statek(nazwa_statku);
 UPDATE postac SET statek='dlugi_waz' WHERE rodzaj='wiking' OR rodzaj='ptak';
-delete from izba where nazwa_izby='spizarnia';
-drop table izba;
+DELETE FROM izba WHERE nazwa_izby='spizarnia';
+DROP TABLE izba;
 
 
 
