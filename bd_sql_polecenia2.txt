@@ -1,6 +1,6 @@
 Zadanie 1
 
-DELETE FROM postac WHERE nazwa='Alrik' OR nazwa='Berg';
+DELETE FROM postac WHERE rodzaj='wiking' AND nazwa !='Bjorn' ORDER BY data_ur LIMIT 2;
 
 ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
 ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
@@ -28,7 +28,7 @@ Zadanie 3
 
 UPDATE postac SET statek='dlugi_waz' WHERE nazwa LIKE '%a%';
 UPDATE statek SET max_ladownosc=max_ladownosc*0.7 WHERE data_wodowania BETWEEN '1901-01-01' AND '2000-12-31';
-ALTER TABLE postac ADD CHECK(wiek<1000);
+ALTER TABLE postac ADD CHECK(wiek<=1000);
 
 Zadanie 4
 INSERT INTO postac VALUES(10, 'Waz Loko', NULL, '1905-01-01', 120, NULL, NULL, '74293848392');
@@ -36,7 +36,7 @@ CREATE TABLE marynarz like postac;
 INSERT INTO marynarz SELECT * from postac WHERE statek IS NOT NULL ;
 
 Zadanie 5
-UPDATE marynarz SET statek =NULL;
+UPDATE marynarz SET statek = NULL;
 DELETE FROM marynarz WHERE id_postaci=8;
 ALTER TABLE postac DROP CONSTRAINT statek;
 DELETE FROM statek;

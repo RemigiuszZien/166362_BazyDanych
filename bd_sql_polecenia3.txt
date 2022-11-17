@@ -1,0 +1,45 @@
+ZAD 1 
+create table zienr.kreatura SELECT * FROM wikingowie.kreatura;
+CREATE TABLE zienr.zasob SELECT * FROM wikingowie.zasob;
+CREATE TABLE zienr.ekwipunek SELECT * FROM wikingowie.ekwipunek;
+
+select * from zasob;
+
+select * from zasob WHERE rodzaj='jedzenie';
+
+SELECT idZasobu, ilosc FROM ekwipunek WHERE idKreatury IN (1,3,5);
+
+Zadanie 2
+SELECT * FROM kreatura WHERE rodzaj<>'wiedzma' AND udzwig>=50;
+
+SELECT * FROM zasob WHERE waga BETWEEN 2 AND 5;
+
+SELECT * FROM kreatura WHERE nazwa LIKE '%or%' AND udzwig BETWEEN 30 and 70;
+
+Zadanie 3
+SELECT * FROM zasob WHERE month(dataPozyskania) IN (7,8);
+
+SELECT * FROM zasob WHERE rodzaj IS NOT NULL ORDER BY waga;
+
+SELECT * FROM kreatura ORDER BY dataUr limit 5;
+
+Zadanie 4
+SELECT DISTINCT rodzaj FROM zasob WHERE rodzaj IS NOT NULL;
+
+SELECT CONCAT(nazwa, '-', rodzaj) AS 'nazwa - rodzaj' FROM kreatura WHERE rodzaj LIKE '%wi%';
+
+SELECT nazwa, ilosc*waga AS 'calkowita-waga' FROM zasob WHERE dataPozyskania BETWEEN '2000-01-01' AND '2007-12-31';
+
+Zadanie 5 
+SELECT nazwa, waga*0.7 AS 'masa-netto', waga*0.3 AS 'waga-odpadkow' FROM zasob;
+
+SELECT DISTINCT nazwa FROM zasob WHERE rodzaj IS NULL;
+
+SELECT DISTINCT rodzaj from zasob WHERE nazwa LIKE 'ba%' OR nazwa LIKE '%os';
+
+
+
+
+
+
+
