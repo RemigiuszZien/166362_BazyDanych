@@ -1,0 +1,32 @@
+Zad 1
+SELECT AVG(waga) AS 'srednia-waga-wikingow' FROM kreatura WHERE rodzaj = 'wiking';
+
+SELECT rodzaj, COUNT(nazwa), AVG(waga) AS 'srednia-waga' FROM kreatura GROUP BY rodzaj;
+
+SELECT AVG(YEAR(NOW()) - YEAR(dataUr)) AS sredni_wiek, rodzaj FROM kreatura GROUP BY rodzaj;
+
+Zadanie 2 
+SELECT rodzaj, SUM(waga*ilosc) FROM zasob GROUP BY rodzaj;
+
+SELECT nazwa, AVG(waga) FROM zasob WHERE ilosc >= 4 GROUP BY nazwa HAVING SUM(waga*ilosc) > 10 % jest zle, do poprawy
+
+trzeci punkt do zrobienia
+
+zadanie drugie do poprawy
+
+Zadanie 3
+select kreatura.nazwa,sum(ekwipunek.ilosc) FROM kreatura JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury GROUP BY kreatura.nazwa;
+
+select kreatura.nazwa, zasob.nazwa from kreatura JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu = zasob.idZasobu ORDER BY kreatura.nazwa;
+
+select kreatura.nazwa from kreatura LEFT JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury WHERE idZasobu IS NULL;
+Zadanie 4
+
+SELECT kreatura.nazwa, zasob.nazwa from kreatura JOIN ekwipunek ON ekwipunek.idKreatury=kreatura.idKreatury JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu WHERE kreatura.rodzaj='wiking' AND dataUr BETWEEN '1670-01-01' AND '1679-12-31';
+
+
+select DISTINCT kreatura.nazwa from kreatura INNER join ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury
+join zasob on ekwipunek.idZasobu=zasob.idZasobu WHERE zasob.rodzaj='jedzenie' order by dataUr DESC limit 5;
+
+
+
