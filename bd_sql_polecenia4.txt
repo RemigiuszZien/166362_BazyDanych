@@ -6,13 +6,12 @@ SELECT rodzaj, COUNT(nazwa), AVG(waga) AS 'srednia-waga' FROM kreatura GROUP BY 
 SELECT AVG(YEAR(NOW()) - YEAR(dataUr)) AS sredni_wiek, rodzaj FROM kreatura GROUP BY rodzaj;
 
 Zadanie 2 
-SELECT rodzaj, SUM(waga*ilosc) FROM zasob GROUP BY rodzaj;
+SELECT rodzaj, SUM(waga) FROM zasob GROUP BY rodzaj;
 
-SELECT nazwa, AVG(waga) FROM zasob WHERE ilosc >= 4 GROUP BY nazwa HAVING SUM(waga*ilosc) > 10 % jest zle, do poprawy
+SELECT nazwa, avg(waga) from zasob WHERE ilosc>=4 group by nazwa HAVING SUM(waga) > 10;
 
-//trzeci punkt do zrobienia
+SELECT COUNT(DISTINCT nazwa), rodzaj from zasob GROUP BY rodzaj HAVING COUNT(*) > 1;
 
-//zadanie drugie do poprawy
 
 Zadanie 3
 select kreatura.nazwa,sum(ekwipunek.ilosc) FROM kreatura JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury GROUP BY kreatura.nazwa;
@@ -32,11 +31,11 @@ join zasob on ekwipunek.idZasobu=zasob.idZasobu WHERE zasob.rodzaj='jedzenie' or
 SELECT CONCAT(a.nazwa,'-', b.nazwa) AS 'id, id+5' FROM kreatura a, kreatura b WHERE a.idKreatury+5=b.idKreatury;
 
 Zad 5
-
+//punkt 1 i drugi do zrobienia
 select kreatura.rodzaj, AVG(zasob.waga*ekwipunek.ilosc) from kreatura, zasob, ekwipunek WHERE kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu = ekwipunek.idZasobu group by rodzaj;
 
 //1pierwsza tabelka = rodzaj, min(dataur), max(dataUr)
-//druga tabela, nazwa
+//druga tabela, b.nazwa
 //3cia data ur, rodzaj
 //pierwsza i 3cia zjoinowac z 
 
@@ -45,3 +44,5 @@ SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) from kreatura a gr
 
 SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) AS 'rodzaj datMin dataMax', b.nazwa, b.dataUr, b.rodzaj from kreatura a, kreatura b WHERE a.rodzaj=b.rodzaj GROUP BY rodzaj HAVING b.dataUr=min(a.dataUr) OR b.dataUr=max(a.dataUr);
  // projekt, naprawic potem
+
+SELECT CONCAT(a.rodzaj, ' ', min(a.dataUr), ' ', max(a.dataUr) AS 'rodzaj dataMin dataMax', b.nazwa, b.dataUr, c.nazwa, c.dataUr, b.rodzaj from kreatura a LEFT JOIN kreatura b ON a.rodzaj = b.rodzaj JOIN kretura c ON a.rodzaj = c.rodzaj;
