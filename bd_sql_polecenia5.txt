@@ -26,4 +26,9 @@ SELECT wyprawa.nazwa, sum(length(dziennik)) from wyprawa JOIN etapy_wyprawy ON w
 
 select wyprawa.nazwa, sum(zasob.waga*zasob.ilosc)/count(uczestnicy.id_uczestnika) from wyprawa JOIN uczestnicy ON wyprawa.id_wyprawy=uczestnicy.id_wyprawy JOIN ekwipunek ON uczestnicy.id_uczestnika=ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu  GROUP BY wyprawa.nazwa;
 
+zad 5 
+SELECT kreatura.nazwa, DATEDIFF(data_rozpoczecia,dataUr) FROM kreatura, wyprawa, sektor, etapy_wyprawy,uczestnicy WHERE sektor.id_sektora=etapy_wyprawy.sektor AND wyprawa.id_wyprawy=etapy_wyprawy.idWyprawy AND uczestnicy.id_uczestnika=kreatura.idKreatury AND uczestnicy.id_wyprawy=wyprawa.id_wyprawy AND sektor.id_sektora=7;
+
+
+
 
