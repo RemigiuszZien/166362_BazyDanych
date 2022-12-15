@@ -8,10 +8,9 @@ SELECT AVG(YEAR(NOW()) - YEAR(dataUr)) AS sredni_wiek, rodzaj FROM kreatura GROU
 Zadanie 2 
 SELECT rodzaj, SUM(waga) FROM zasob GROUP BY rodzaj;
 
-SELECT nazwa, avg(waga) from zasob WHERE ilosc>=4 group by nazwa HAVING SUM(waga) > 10;
+SELECT nazwa, AVG(waga) FROM zasob GROUP BY nazwa HAVING SUM(ilosc) >= 4 AND SUM(ilosc*waga)>10;
 
-SELECT COUNT(DISTINCT nazwa), rodzaj from zasob GROUP BY rodzaj HAVING COUNT(*) > 1;
-
+SELECT rodzaj, COUNT(DISTINCT nazwa) FROM zasob GROUP BY rodzaj HAVING COUNT(DISTINCT nazwa)>1 AND COUNT(DISTINCT nazwa)<>COUNT(nazwa);
 
 Zadanie 3
 select kreatura.nazwa,sum(ekwipunek.ilosc) FROM kreatura JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idKreatury GROUP BY kreatura.nazwa;
@@ -31,18 +30,27 @@ join zasob on ekwipunek.idZasobu=zasob.idZasobu WHERE zasob.rodzaj='jedzenie' or
 SELECT CONCAT(a.nazwa,'-', b.nazwa) AS 'id, id+5' FROM kreatura a, kreatura b WHERE a.idKreatury+5=b.idKreatury;
 
 Zad 5
+
+SELECT kreatura.rodzaj, AVG(zasob.waga*ekwipunek.ilosc) 
+FROM ekwipunek NATURAL JOIN kreatura INNER JOIN zasob ON zasob.idZasobu=ekwipunek.idZasobu 
+GROUP BY kreatura.rodzaj HAVING SUM(ekwipunek.ilosc)<30 AND kreatura.rodzaj NOT IN("malpa","waz");
+
+
+
+
+
 //punkt 1 i drugi do zrobienia
-select kreatura.rodzaj, AVG(zasob.waga*ekwipunek.ilosc) from kreatura, zasob, ekwipunek WHERE kreatura.idKreatury = ekwipunek.idKreatury and zasob.idZasobu = ekwipunek.idZasobu group by rodzaj;
+//select kreatura.rodzaj, AVG(zasob.waga*ekwipunek.ilosc) from kreatura, zasob, ekwipunek WHERE kreatura.idKreatury = //ekwipunek.idKreatury and zasob.idZasobu = ekwipunek.idZasobu group by rodzaj;
 
 //1pierwsza tabelka = rodzaj, min(dataur), max(dataUr)
 //druga tabela, b.nazwa
 //3cia data ur, rodzaj
 //pierwsza i 3cia zjoinowac z 
 
-SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) from kreatura a group by rodzaj; // projekt, naprawic potem
+//SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) from kreatura a group by rodzaj; // projekt, naprawic potem
 
 
-SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) AS 'rodzaj datMin dataMax', b.nazwa, b.dataUr, b.rodzaj from kreatura a, kreatura b WHERE a.rodzaj=b.rodzaj GROUP BY rodzaj HAVING b.dataUr=min(a.dataUr) OR b.dataUr=max(a.dataUr);
+//SELECT CONCAT(a.rodzaj,' ', min(a.dataUr),' ', max(a.dataUr)) AS 'rodzaj datMin dataMax', b.nazwa, b.dataUr, b.rodzaj from //kreatura a, kreatura b WHERE a.rodzaj=b.rodzaj GROUP BY rodzaj HAVING b.dataUr=min(a.dataUr) OR b.dataUr=max(a.dataUr);
  // projekt, naprawic potem
 
-SELECT CONCAT(a.rodzaj, ' ', min(a.dataUr), ' ', max(a.dataUr) AS 'rodzaj dataMin dataMax', b.nazwa, b.dataUr, c.nazwa, c.dataUr, b.rodzaj from kreatura a LEFT JOIN kreatura b ON a.rodzaj = b.rodzaj JOIN kretura c ON a.rodzaj = c.rodzaj;
+//SELECT CONCAT(a.rodzaj, ' ', min(a.dataUr), ' ', max(a.dataUr) AS 'rodzaj dataMin dataMax', b.nazwa, b.dataUr, c.nazwa, //c.dataUr, b.rodzaj from kreatura a LEFT JOIN kreatura b ON a.rodzaj = b.rodzaj JOIN kretura c ON a.rodzaj = c.rodzaj;
