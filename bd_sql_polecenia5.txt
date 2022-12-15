@@ -1,0 +1,29 @@
+ZAD 1
+CREATE TABLE zienr.etapy_wyprawy SELECT * FROM wikingowie.etapy_wyprawy;
+CREATE TABLE zienr.uczestnicy SELECT * FROM wikingowie.uczestnicy;
+CREATE TABLE zienr.sektor SELECT * FROM wikingowie.sektor;
+CREATE TABLE zienr.wyprawa SELECT * FROM wikingowie.wyprawa;
+
+SELECT kreatura.nazwa from kreatura LEFT JOIN uczestnicy ON idKreatury=id_uczestnika WHERE id_uczestnika IS NULL;
+
+SELECT wyprawa.nazwa, sum(ekwipunek.ilosc) FROM wyprawa, uczestnicy, ekwipunek WHERE wyprawa.id_wyprawy = uczestnicy.id_wyprawy AND uczestnicy.id_uczestnika=ekwipunek.idKreatury GROUP BY wyprawa.nazwa;
+
+ZAD 2
+
+SELECT wyprawa.nazwa, count(uczestnicy.id_uczestnika) 'ilosc_uczesctnikow', GROUP_CONCAT(kreatura.nazwa) uczestnicy FROM wyprawa, kreatura, uczestnicy WHERE wyprawa.id_wyprawy = uczestnicy.id_wyprawy AND uczestnicy.id_uczestnika = kreatura.idKreatury GROUP BY wyprawa.nazwa;
+
+SELECT wyprawa.nazwa, etapy_wyprawy.idEtapu, sektor.nazwa 'nazwa sektoru', kreatura.nazwa 'nazwa kierownika' FROM etapy_wyprawy, sektor, wyprawa, kreatura WHERE wyprawa.id_wyprawy=etapy_wyprawy.idWyprawy AND sektor.id_sektora=etapy_wyprawy.sektor AND wyprawa.kierownik=kreatura.idKreatury ORDER BY data_rozpoczecia DESC, kolejnosc DESC;
+
+zadanie 3
+
+select sektor.nazwa, count(etapy_wyprawy.sektor) FROM sektor LEFT JOIN etapy_wyprawy ON sektor.id_sektora = etapy_wyprawy.sektor GROUP BY sektor.nazwa;
+
+SELECT kreatura.nazwa, IF(count(id_wyprawy)>0, 'bral udzial w wyprawie', 'nie bral udzialu w wyprawie') udzial from kreatura LEFT JOIN uczestnicy ON kreatura.idKreatury=uczestnicy.id_uczestnika GROUP BY kreatura.nazwa;
+
+
+Zadanie 4 
+SELECT wyprawa.nazwa, sum(length(dziennik)) from wyprawa JOIN etapy_wyprawy ON wyprawa.id_wyprawy=etapy_wyprawy.idWyprawy GROUP BY wyprawa.nazwa HAVING sum(length(dziennik))<400;
+
+select wyprawa.nazwa, sum(zasob.waga*zasob.ilosc)/count(uczestnicy.id_uczestnika) from wyprawa JOIN uczestnicy ON wyprawa.id_wyprawy=uczestnicy.id_wyprawy JOIN ekwipunek ON uczestnicy.id_uczestnika=ekwipunek.idKreatury JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu  GROUP BY wyprawa.nazwa;
+
+
